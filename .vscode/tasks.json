@@ -4,22 +4,18 @@
         {
             "label": "Create Build/Debug Directory",
             "type": "shell",
-            "command": "mkdir",
-            "args": [
-                "-p",
-                "${workspaceFolder}/Build/Debug"
-            ],
+            "windows": {
+                "command": "if (!(Test-Path -Path 'Build\\Debug' -PathType Container)) { mkdir Build\\Debug }",
+            },
             "problemMatcher": [],
             "detail": "Ensure Build/Debug directory exists before building"
         },
         {
             "label": "Create Build/Release Directory",
             "type": "shell",
-            "command": "mkdir",
-            "args": [
-                "-p",
-                "${workspaceFolder}/Build/Release"
-            ],
+            "windows": {
+                "command": "if (!(Test-Path -Path 'Build\\Release' -PathType Container)) { mkdir Build\\Release }",
+            },
             "problemMatcher": [],
             "detail": "Ensure Build/Release directory exists before building"
         },
