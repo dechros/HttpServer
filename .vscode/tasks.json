@@ -1,0 +1,102 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create Build/Debug Directory",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "${workspaceFolder}/Build/Debug"
+            ],
+            "problemMatcher": [],
+            "detail": "Ensure Build/Debug directory exists before building"
+        },
+        {
+            "label": "Create Build/Release Directory",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "${workspaceFolder}/Build/Release"
+            ],
+            "problemMatcher": [],
+            "detail": "Ensure Build/Release directory exists before building"
+        },
+        {
+            "label": "Build C++ (Debug)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "${workspaceFolder}\\Source\\Main.cpp",
+                "-o",
+                "${workspaceFolder}/Build/Debug/${workspaceFolderBasename}.exe",
+                "-std=c++23"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "dependsOn": [
+                "Create Build/Debug Directory"
+            ],
+            "detail": "Build C++ code using g++ for debugging"
+        },
+        {
+            "label": "Build C++ (Release)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "${workspaceFolder}\\Source\\Main.cpp",
+                "-o",
+                "${workspaceFolder}/Build/Release/${workspaceFolderBasename}.exe",
+                "-O2",
+                "-s",
+                "-std=c++23"
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "dependsOn": [
+                "Create Build/Release Directory"
+            ],
+            "detail": "Build C++ code using g++ with optimizations"
+        },
+        {
+            "label": "Update c_cpp_properties.json Folder Structures",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/.vscode/update_c_cpp_properties.py"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Update the folder structures in cppProperties.json"
+        },
+        {
+            "label": "Update tasks.json Folder Structures",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/.vscode/update_tasks.py"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Update the folder structures in tasks.json"
+        },
+        {
+            "label": "Update Folder Structures Tasks",
+            "dependsOn": [
+                "Update c_cpp_properties.json Folder Structures",
+                "Update tasks.json Folder Structures"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Composite task to run multiple update folder structures tasks"
+        }
+    ]
+}
