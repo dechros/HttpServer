@@ -27,7 +27,8 @@
                 "${workspaceFolder}\\Source\\Main.cpp",
                 "-o",
                 "${workspaceFolder}/Build/Debug/${workspaceFolderBasename}.exe",
-                "-std=c++23"
+                "-std=c++23",
+                "-g"
             ],
             "group": {
                 "kind": "build",

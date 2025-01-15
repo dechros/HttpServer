@@ -3,7 +3,6 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\msys64\\usr\\include\\**",
                 "${workspaceFolder}\\Source\\**"
             ],
             "defines": [
@@ -12,7 +11,7 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.19041.0",
-            "compilerPath": "C:\\msys64\\usr\\bin\\g++.exe",
+            "compilerPath": "C:\\msys64\\mingw64\\bin\\g++.exe",
             "intelliSenseMode": "gcc-x64"
         }
     ],
