@@ -6,8 +6,11 @@ int main(int numArgs, char *argArray[])
 {
     Services::ErrorService errorService("ErrorService");
     errorService.Start();
-    errorService.LogError("Hello World!");
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    for (int i = 0; i < 15; i++)
+    {
+        errorService.LogError("Hello World!", "main");
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     errorService.Stop();
     return 0;
 }

@@ -12,17 +12,15 @@ namespace Services
     {
     private:
         std::queue<std::string> errorQueue;
-        std::mutex errorMutex;
-        constexpr static int MAX_QUEUE_SIZE = 100;
+        constexpr static int MAX_QUEUE_SIZE = 10;
 
         void Task() override;
 
     public:
         ErrorService(const std::string &serviceName);
         ~ErrorService();
-        void LogError(const std::string &error);
+        void LogError(const std::string &error, const std::string &logServiceName);
     };
-
 }
 
 #endif

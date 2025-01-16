@@ -4,18 +4,19 @@
 #include <iostream>
 #include <string>
 #include <thread>
-#include <atomic>
+#include <mutex>
 
 namespace Services
 {
     class BaseService
     {
     private:
-        const std::string serviceName;
         std::atomic<bool> isRunning;
         std::thread serviceThread;
 
     protected:
+        const std::string serviceName;
+        std::mutex serviceMutex;
         virtual void Task() = 0;
 
     public:
