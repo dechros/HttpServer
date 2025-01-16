@@ -3,7 +3,10 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}\\Source\\**"
+                "${workspaceFolder}\\Source\\**",
+                "${workspaceFolder}\\Source\\Services\\**",
+                "${workspaceFolder}\\Source\\Services\\BaseService\\**",
+                "${workspaceFolder}\\Source\\Services\\ErrorService\\**"
             ],
             "defines": [
                 "_DEBUG",
