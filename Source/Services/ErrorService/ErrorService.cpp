@@ -1,7 +1,11 @@
 #include "ErrorService.h"
+#include "DateTimeHelper.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <ctime>
+#include <iomanip>
+#include <mutex>
 
 namespace Services
 {
@@ -26,12 +30,14 @@ namespace Services
     void ErrorService::LogError(const std::string &error, const std::string &logServiceName)
     {
         std::unique_lock<std::mutex> lock(serviceMutex);
+        std::string dateTimeString = Helpers::DateTimeHelper::GetCurrentDateTime();
+
         if (errorQueue.size() >= MAX_QUEUE_SIZE)
         {
             errorQueue.pop();
             errorQueue.pop();
-            errorQueue.push(serviceName + ": " + "Please increase max queue size in Error Service.");
+            errorQueue.push(dateTimeString + " | " + serviceName + " | " + "Please increase max queue size.");
         }
-        errorQueue.push(logServiceName + ": " + error);
+        errorQueue.push(dateTimeString + " | " + logServiceName + " | " + error);
     }
 }

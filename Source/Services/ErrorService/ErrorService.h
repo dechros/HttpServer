@@ -4,7 +4,6 @@
 #include "BaseService.h"
 #include <queue>
 #include <string>
-#include <mutex>
 
 namespace Services
 {
