@@ -24,7 +24,7 @@ namespace Services
             std::cout << errorQueue.front() << std::endl;
             errorQueue.pop();
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(TASK_INTERVAL_MS));
     }
 
     void ErrorService::LogError(const std::string &error, const std::string &logServiceName)

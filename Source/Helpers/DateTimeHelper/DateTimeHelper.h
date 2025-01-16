@@ -9,6 +9,7 @@ namespace Helpers
     {
     public:
         static std::string GetCurrentDateTime();
+        static std::string GetCurrentDateTimeUnderline();
     };
 }
 
