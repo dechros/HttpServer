@@ -27,7 +27,7 @@
                 "${workspaceFolder}\\Source\\Main.cpp",
                 "${workspaceFolder}\\Source\\Helpers\\DateTimeHelper\\DateTimeHelper.cpp",
                 "${workspaceFolder}\\Source\\Services\\BaseService\\BaseService.cpp",
-                "${workspaceFolder}\\Source\\Services\\ErrorService\\ErrorService.cpp",
+                "${workspaceFolder}\\Source\\Services\\LogService\\LogService.cpp",
                 "-o",
                 "${workspaceFolder}/Build/Debug/${workspaceFolderBasename}.exe",
                 "-O0",
@@ -37,7 +37,7 @@
                 "-I${workspaceFolder}\\Source\\Helpers\\DateTimeHelper",
                 "-I${workspaceFolder}\\Source\\Services",
                 "-I${workspaceFolder}\\Source\\Services\\BaseService",
-                "-I${workspaceFolder}\\Source\\Services\\ErrorService"
+                "-I${workspaceFolder}\\Source\\Services\\LogService"
             ],
             "group": {
                 "kind": "build",
@@ -59,7 +59,7 @@
                 "${workspaceFolder}\\Source\\Main.cpp",
                 "${workspaceFolder}\\Source\\Helpers\\DateTimeHelper\\DateTimeHelper.cpp",
                 "${workspaceFolder}\\Source\\Services\\BaseService\\BaseService.cpp",
-                "${workspaceFolder}\\Source\\Services\\ErrorService\\ErrorService.cpp",
+                "${workspaceFolder}\\Source\\Services\\LogService\\LogService.cpp",
                 "-o",
                 "${workspaceFolder}/Build/Release/${workspaceFolderBasename}.exe",
                 "-O2",
@@ -69,7 +69,7 @@
                 "-I${workspaceFolder}\\Source\\Helpers\\DateTimeHelper",
                 "-I${workspaceFolder}\\Source\\Services",
                 "-I${workspaceFolder}\\Source\\Services\\BaseService",
-                "-I${workspaceFolder}\\Source\\Services\\ErrorService"
+                "-I${workspaceFolder}\\Source\\Services\\LogService"
             ],
             "group": "build",
             "problemMatcher": [

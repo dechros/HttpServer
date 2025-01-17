@@ -25,7 +25,6 @@ namespace Services
                                     {
             while (isRunning.load())
             {
-                std::unique_lock<std::mutex> lock(serviceMutex);
                 Task();
             } });
     }

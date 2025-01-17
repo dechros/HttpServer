@@ -8,7 +8,7 @@
                 "${workspaceFolder}\\Source\\Helpers\\DateTimeHelper\\**",
                 "${workspaceFolder}\\Source\\Services\\**",
                 "${workspaceFolder}\\Source\\Services\\BaseService\\**",
-                "${workspaceFolder}\\Source\\Services\\ErrorService\\**"
+                "${workspaceFolder}\\Source\\Services\\LogService\\**"
             ],
             "defines": [
                 "_DEBUG",

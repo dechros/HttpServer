@@ -23,4 +23,14 @@ namespace Helpers
         std::string currentDateTime = buffer;
         return currentDateTime;
     }
+
+    std::string DateTimeHelper::GetCurrentTime()
+    {
+        time_t now = std::time(nullptr);
+        std::tm *tm = std::localtime(&now);
+        char buffer[20];
+        std::strftime(buffer, sizeof(buffer), "%H:%M:%S", tm);
+        std::string currentTime = buffer;
+        return currentTime;
+    }
 }
