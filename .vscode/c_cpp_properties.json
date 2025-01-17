@@ -4,11 +4,15 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}\\Source\\**",
+                "${workspaceFolder}\\Source\\App\\**",
                 "${workspaceFolder}\\Source\\Helpers\\**",
-                "${workspaceFolder}\\Source\\Helpers\\DateTimeHelper\\**",
+                "${workspaceFolder}\\Source\\Helpers\\LogHelper\\**",
                 "${workspaceFolder}\\Source\\Services\\**",
                 "${workspaceFolder}\\Source\\Services\\BaseService\\**",
-                "${workspaceFolder}\\Source\\Services\\LogService\\**"
+                "${workspaceFolder}\\Source\\Services\\LogService\\**",
+                "${workspaceFolder}\\Source\\Utilities\\**",
+                "${workspaceFolder}\\Source\\Utilities\\ConsoleUtility\\**",
+                "${workspaceFolder}\\Source\\Utilities\\DateTimeUtility\\**"
             ],
             "defines": [
                 "_DEBUG",

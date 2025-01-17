@@ -2,7 +2,7 @@
 
 namespace Services
 {
-    BaseService::BaseService(const std::string &serviceName) : serviceName(serviceName), isRunning(false)
+    BaseService::BaseService(const std::string &serviceName) : serviceName(serviceName), isRunning(false), error(false)
     {
     }
 
@@ -41,6 +41,11 @@ namespace Services
     bool BaseService::IsRunning() const
     {
         return isRunning.load();
+    }
+
+    bool BaseService::HasError() const
+    {
+        return error.load();
     }
 
     const std::string &BaseService::GetServiceName() const
