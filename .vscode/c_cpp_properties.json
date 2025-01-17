@@ -6,13 +6,15 @@
                 "${workspaceFolder}\\Source\\**",
                 "${workspaceFolder}\\Source\\App\\**",
                 "${workspaceFolder}\\Source\\Helpers\\**",
+                "${workspaceFolder}\\Source\\Helpers\\FileHelper\\**",
                 "${workspaceFolder}\\Source\\Helpers\\LogHelper\\**",
                 "${workspaceFolder}\\Source\\Services\\**",
                 "${workspaceFolder}\\Source\\Services\\BaseService\\**",
                 "${workspaceFolder}\\Source\\Services\\LogService\\**",
                 "${workspaceFolder}\\Source\\Utilities\\**",
                 "${workspaceFolder}\\Source\\Utilities\\ConsoleUtility\\**",
-                "${workspaceFolder}\\Source\\Utilities\\DateTimeUtility\\**"
+                "${workspaceFolder}\\Source\\Utilities\\DateTimeUtility\\**",
+                "${workspaceFolder}\\Source\\Utilities\\LogFileUtility\\**"
             ],
             "defines": [
                 "_DEBUG",

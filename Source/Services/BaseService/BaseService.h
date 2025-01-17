@@ -19,7 +19,7 @@ namespace Services
         std::atomic<bool> error;
         std::mutex serviceMutex;
         virtual void Task() = 0;
-        virtual void HandleError(const std::string &errorMessage) = 0;
+        virtual void HandleError(const std::string &methodName, const std::string &message) = 0;
 
     public:
         BaseService(const std::string &serviceName);
