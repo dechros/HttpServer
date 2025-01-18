@@ -19,7 +19,7 @@ namespace Core
             {
                 serviceArgs[key] = "";
             }
-        } // --key value
+        }
 
         auto service = std::make_shared<Core::Services::LogService>("LogService", serviceArgs);
         serviceRegistry.RegisterService(service);
