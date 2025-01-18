@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 
-namespace Helpers
+namespace Core::Helpers
 {
     class FileHelper
     {

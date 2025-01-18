@@ -5,8 +5,10 @@
 #include <string>
 #include <thread>
 #include <mutex>
+#include <unordered_map>
+#include <variant>
 
-namespace Services
+namespace Core::Services
 {
     class BaseService
     {
@@ -16,13 +18,15 @@ namespace Services
         std::thread serviceThread;
 
     protected:
+        const std::unordered_map<std::string, std::string> serviceArgs;
         std::atomic<bool> error;
         std::mutex serviceMutex;
         virtual void Task() = 0;
-        virtual void HandleError(const std::string &methodName, const std::string &message) = 0;
+        virtual void HandleError(const std::string &message, const std::string &methodName) = 0;
+        const std::string GetArgValue(const std::string &key) const;
 
     public:
-        BaseService(const std::string &serviceName);
+        BaseService(const std::string &serviceName, std::unordered_map<std::string, std::string> &args);
         virtual ~BaseService();
 
         void Start();

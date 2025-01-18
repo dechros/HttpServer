@@ -3,9 +3,9 @@
 
 #include <string>
 
-namespace Utilities
+namespace Core::Helpers
 {
-    class DateTimeUtility
+    class DateTimeHelper
     {
     public:
         static std::string GetCurrentTime();

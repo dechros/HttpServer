@@ -3,7 +3,7 @@
 #include <sstream>
 #include <fstream>
 
-namespace Helpers
+namespace Core::Helpers
 {
     std::string FileHelper::ReadFile(const std::string &filePath)
     {

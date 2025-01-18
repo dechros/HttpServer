@@ -3,8 +3,9 @@
 
 #include <string>
 #include <mutex>
+#include "LogEntry.h"
 
-namespace Utilities
+namespace Core::Utilities
 {
     class LogFileUtility
     {
@@ -19,8 +20,8 @@ namespace Utilities
         static std::string GetLogFileName();
 
     public:
-        static bool Log(const std::string &className, const std::string &methodName, const std::string &message);
-        static bool Log(const std::string &message);
+        static bool Log(const Core::Types::LogEntry &logEntry);
     };
 }
+
 #endif

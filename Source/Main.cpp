@@ -1,10 +1,20 @@
 #include <iostream>
 #include <string>
-#include "App.h"
+#include "Server.h"
 
 int main(int numArgs, char *argArray[])
 {
-    App app(numArgs, argArray);
-    app.Run();
+    Core::Server server(numArgs, argArray);
+
+    try
+    {
+        server.Run();
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
+        return 1;
+    }
+
     return 0;
 }

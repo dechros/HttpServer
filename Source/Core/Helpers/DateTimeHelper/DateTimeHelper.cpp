@@ -1,10 +1,10 @@
-#include "DateTimeUtility.h"
+#include "DateTimeHelper.h"
 #include <iostream>
 #include <ctime>
 
-namespace Utilities
+namespace Core::Helpers
 {
-    std::string DateTimeUtility::GetCurrentTime()
+    std::string DateTimeHelper::GetCurrentTime()
     {
         std::string defaultTime = "00:00:00";
 
@@ -26,7 +26,7 @@ namespace Utilities
         return std::string(buffer);
     }
 
-    std::string DateTimeUtility::GetCurrentDateTime(const std::string &separator)
+    std::string DateTimeHelper::GetCurrentDateTime(const std::string &separator)
     {
         std::string defaultDateTime;
         if (separator.empty())
