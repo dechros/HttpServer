@@ -2,7 +2,7 @@
 
 namespace Core::Services
 {
-    ServiceConfig::ServiceConfig(int argc, char *argv[]) : args(std::move(ParseArgs(argc, argv)))
+    ServiceConfig::ServiceConfig(int argc, char *argv[], const std::string &serviceName) : serviceName(serviceName), args(ParseArgs(argc, argv))
     {
     }
 
@@ -42,5 +42,10 @@ namespace Core::Services
             }
         }
         return args;
+    }
+
+    const std::string &ServiceConfig::GetServiceName() const
+    {
+        return serviceName;
     }
 }

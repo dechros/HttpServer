@@ -6,7 +6,7 @@
 #include <thread>
 #include <mutex>
 #include <unordered_map>
-#include <variant>
+#include <atomic>
 #include "ServiceConfig.h"
 
 namespace Core::Services
@@ -14,12 +14,11 @@ namespace Core::Services
     class BaseService
     {
     private:
+        const ServiceConfig serviceConfig;
         std::atomic<bool> isRunning;
         std::thread serviceThread;
-        std::string serviceName;
 
     protected:
-        const ServiceConfig serviceConfig;
         std::atomic<bool> error;
         std::mutex serviceMutex;
 
@@ -27,14 +26,14 @@ namespace Core::Services
         virtual void HandleError(const std::string &message, const std::string &methodName) = 0;
 
     public:
-        BaseService(int numArgs, char *argArray[], const std::string &serviceName);
+        BaseService(const ServiceConfig &config);
         virtual ~BaseService();
 
+        const std::string &GetServiceName() const;
         void Start();
         void Stop();
         bool IsRunning() const;
         bool HasError() const;
-        const std::string &GetServiceName() const;
     };
 }
 

@@ -18,8 +18,7 @@ namespace Core::Services
         ServiceRegistry();
         ~ServiceRegistry();
         void RegisterService(const std::shared_ptr<BaseService> &service);
-        std::shared_ptr<BaseService> GetService(const std::string &name);
-
+        std::optional<std::shared_ptr<BaseService>> GetService(const std::string &name);
         void StartAll();
         void StopAll();
         bool HasError() const;

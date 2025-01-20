@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <csignal>
+#include <atomic>
 #include "ServiceRegistry.h"
 
 namespace Core

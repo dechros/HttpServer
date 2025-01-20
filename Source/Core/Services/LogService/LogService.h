@@ -21,7 +21,7 @@ namespace Core::Services
         void HandleError(const std::string &message, const std::string &methodName) override;
 
     public:
-        LogService(int numArgs, char *argArray[], const std::string &serviceName);
+        LogService(const ServiceConfig &config);
         ~LogService();
         void AddLog(const Core::Types::LogEntry &logEntry);
     };

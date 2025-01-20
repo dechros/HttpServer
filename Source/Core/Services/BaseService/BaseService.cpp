@@ -2,7 +2,7 @@
 
 namespace Core::Services
 {
-    BaseService::BaseService(int numArgs, char *argArray[], const std::string &serviceName) : serviceName(serviceName), serviceConfig(numArgs, argArray), isRunning(false), error(false)
+    BaseService::BaseService(const ServiceConfig &config) : serviceConfig(config), isRunning(false), error(false)
     {
     }
 
@@ -50,6 +50,6 @@ namespace Core::Services
 
     const std::string &BaseService::GetServiceName() const
     {
-        return serviceName;
+        return serviceConfig.GetServiceName();
     }
 }

@@ -16,18 +16,18 @@ namespace Core::Services
 
         if (services.find(name) != services.end())
         {
-            throw std::runtime_error("Service already registered: " + name);
+            return;
         }
 
         services[name] = service;
     }
 
-    std::shared_ptr<BaseService> ServiceRegistry::GetService(const std::string &name)
+    std::optional<std::shared_ptr<BaseService>> ServiceRegistry::GetService(const std::string &name)
     {
         auto it = services.find(name);
         if (it == services.end())
         {
-            throw std::runtime_error("Service not found: " + name);
+            return std::nullopt;
         }
 
         return it->second;

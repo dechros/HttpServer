@@ -81,6 +81,7 @@
         "semaphore": "cpp",
         "span": "cpp",
         "text_encoding": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "csignal": "cpp"
     }
 }
