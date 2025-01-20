@@ -11,7 +11,7 @@
 
 namespace Core::Services
 {
-    LogService::LogService(const std::string &serviceName, std::unordered_map<std::string, std::string> &args) : BaseService(serviceName, args)
+    LogService::LogService(int numArgs, char *argArray[], const std::string &serviceName) : BaseService(numArgs, argArray, serviceName)
     {
         HandleError("Failed to start log service", "Task");
     }

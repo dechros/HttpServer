@@ -2,7 +2,7 @@
 
 namespace Core::Services
 {
-    BaseService::BaseService(const std::string &serviceName, std::unordered_map<std::string, std::string> &args) : serviceName(serviceName), serviceArgs(args), isRunning(false), error(false)
+    BaseService::BaseService(int numArgs, char *argArray[], const std::string &serviceName) : serviceName(serviceName), serviceConfig(numArgs, argArray), isRunning(false), error(false)
     {
     }
 
@@ -51,22 +51,5 @@ namespace Core::Services
     const std::string &BaseService::GetServiceName() const
     {
         return serviceName;
-    }
-
-    const std::string BaseService::GetArgValue(const std::string &key) const
-    {
-        try
-        {
-            auto it = serviceArgs.find(key);
-            if (it == serviceArgs.end())
-            {
-                return "";
-            }
-            return it->second;
-        }
-        catch (...)
-        {
-            return "";
-        }
     }
 }

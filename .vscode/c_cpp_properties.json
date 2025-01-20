@@ -26,6 +26,7 @@
                 "${workspaceFolder}\\Source\\Core\\Services\\DatabaseService\\**",
                 "${workspaceFolder}\\Source\\Core\\Services\\FileService\\**",
                 "${workspaceFolder}\\Source\\Core\\Services\\LogService\\**",
+                "${workspaceFolder}\\Source\\Core\\Services\\ServiceConfig\\**",
                 "${workspaceFolder}\\Source\\Core\\Services\\ServiceRegistry\\**",
                 "${workspaceFolder}\\Source\\Core\\Tests\\**",
                 "${workspaceFolder}\\Source\\Core\\Types\\**",

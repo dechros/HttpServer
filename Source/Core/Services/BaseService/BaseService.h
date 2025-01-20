@@ -7,26 +7,27 @@
 #include <mutex>
 #include <unordered_map>
 #include <variant>
+#include "ServiceConfig.h"
 
 namespace Core::Services
 {
     class BaseService
     {
     private:
-        const std::string serviceName;
         std::atomic<bool> isRunning;
         std::thread serviceThread;
+        std::string serviceName;
 
     protected:
-        const std::unordered_map<std::string, std::string> serviceArgs;
+        const ServiceConfig serviceConfig;
         std::atomic<bool> error;
         std::mutex serviceMutex;
+
         virtual void Task() = 0;
         virtual void HandleError(const std::string &message, const std::string &methodName) = 0;
-        const std::string GetArgValue(const std::string &key) const;
 
     public:
-        BaseService(const std::string &serviceName, std::unordered_map<std::string, std::string> &args);
+        BaseService(int numArgs, char *argArray[], const std::string &serviceName);
         virtual ~BaseService();
 
         void Start();

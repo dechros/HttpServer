@@ -10,8 +10,7 @@ namespace Core
     class Server
     {
     private:
-        Core::Services::ServiceRegistry serviceRegistry;
-        std::unordered_map<std::string, std::string> serviceArgs;
+        Services::ServiceRegistry serviceRegistry;
 
     public:
         Server(int numArgs, char *argArray[]);
