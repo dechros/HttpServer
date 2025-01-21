@@ -17,9 +17,9 @@ namespace Core::Utilities
         static int logFileSuffix;
         static std::mutex logFileMutex;
 
-        static std::string GetLogFileName();
 
     public:
+        static std::string GetLogFileName();
         static bool Log(const Core::Types::LogEntry &logEntry);
     };
 }

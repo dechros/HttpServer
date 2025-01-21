@@ -82,6 +82,8 @@
         "span": "cpp",
         "text_encoding": "cpp",
         "codecvt": "cpp",
-        "csignal": "cpp"
+        "csignal": "cpp",
+        "cstdarg": "cpp",
+        "unordered_set": "cpp"
     }
 }

@@ -21,17 +21,16 @@ namespace Core::Services
 
     void LogService::Task()
     {
-
         {
             std::unique_lock<std::mutex> lock(serviceMutex);
 
             if (!logQueue.empty())
             {
-                Core::Types::LogEntry logEntry = logQueue.front();
-                Core::Utilities::LogConsoleUtility::Log(logEntry);
-                if (!Core::Utilities::LogFileUtility::Log(logEntry))
+                Types::LogEntry logEntry = logQueue.front();
+                Utilities::LogConsoleUtility::Log(logEntry);
+                if (!Utilities::LogFileUtility::Log(logEntry))
                 {
-                    HandleError("Failed to log to file", "Task");
+                    Utilities::LogConsoleUtility::Log({"Failed to log to file: " + Utilities::LogFileUtility::GetLogFileName(), GetServiceName(), "Task"});
                 }
                 logQueue.pop();
             }
@@ -40,7 +39,7 @@ namespace Core::Services
         std::this_thread::sleep_for(std::chrono::milliseconds(TASK_INTERVAL_MS));
     }
 
-    void LogService::AddLog(const Core::Types::LogEntry &logEntry)
+    void LogService::AddLog(const Types::LogEntry &logEntry)
     {
         std::unique_lock<std::mutex> lock(serviceMutex);
 
@@ -49,14 +48,5 @@ namespace Core::Services
             logQueue.pop();
         }
         logQueue.push(logEntry);
-    }
-
-    void LogService::HandleError(const std::string &message, const std::string &methodName)
-    {
-        if (!HasError())
-        {
-            Utilities::LogConsoleUtility::Log(Core::Types::LogEntry(message, "LogService", methodName));
-            error = true;
-        }
     }
 }

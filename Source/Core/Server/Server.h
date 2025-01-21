@@ -6,12 +6,14 @@
 #include <csignal>
 #include <atomic>
 #include "ServiceRegistry.h"
+#include "LogService.h"
 
 namespace Core
 {
     class Server
     {
     private:
+        std::shared_ptr<Services::LogService> logService;
         Services::ServiceRegistry serviceRegistry;
 
     public:

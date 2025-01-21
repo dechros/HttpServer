@@ -14,16 +14,15 @@ namespace Core::Services
     class BaseService
     {
     private:
-        const ServiceConfig serviceConfig;
         std::atomic<bool> isRunning;
         std::thread serviceThread;
 
     protected:
+        const ServiceConfig serviceConfig;
         std::atomic<bool> error;
         std::mutex serviceMutex;
 
         virtual void Task() = 0;
-        virtual void HandleError(const std::string &message, const std::string &methodName) = 0;
 
     public:
         BaseService(const ServiceConfig &config);

@@ -32,9 +32,11 @@
                 "${workspaceFolder}\\Source\\Core\\Tests\\**",
                 "${workspaceFolder}\\Source\\Core\\Types\\**",
                 "${workspaceFolder}\\Source\\Core\\Types\\LogEntry\\**",
+                "${workspaceFolder}\\Source\\Core\\Types\\TcpClient\\**",
                 "${workspaceFolder}\\Source\\Core\\Utilities\\**",
                 "${workspaceFolder}\\Source\\Core\\Utilities\\LogConsoleUtility\\**",
-                "${workspaceFolder}\\Source\\Core\\Utilities\\LogFileUtility\\**"
+                "${workspaceFolder}\\Source\\Core\\Utilities\\LogFileUtility\\**",
+                "${workspaceFolder}\\Source\\Core\\Utilities\\SocketUtility\\**"
             ],
             "defines": [
                 "_DEBUG",

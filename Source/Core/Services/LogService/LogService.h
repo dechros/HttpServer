@@ -18,7 +18,6 @@ namespace Core::Services
         std::queue<Core::Types::LogEntry> logQueue;
 
         void Task() override;
-        void HandleError(const std::string &message, const std::string &methodName) override;
 
     public:
         LogService(const ServiceConfig &config);

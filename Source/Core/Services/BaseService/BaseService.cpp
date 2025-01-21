@@ -23,7 +23,7 @@ namespace Core::Services
         isRunning.store(true);
         serviceThread = std::thread([this]()
                                     {
-            while (isRunning.load())
+            while (isRunning.load() && !error.load())
             {
                 Task();
             } });
