@@ -8,9 +8,12 @@ namespace Core
     Server::Server(int numArgs, char *argArray[])
     {
         SignalHandler::Initialize();
-        serviceRegistry.RegisterService(std::make_shared<Services::LogService>(Services::ServiceConfig(numArgs, argArray, "LogService")));
-        logService = std::dynamic_pointer_cast<Services::LogService>(*serviceRegistry.GetService("LogService"));
-        serviceRegistry.RegisterService(std::make_shared<Services::CommunicationService>(Services::ServiceConfig(numArgs, argArray, "CommunicationService"), logService));
+
+        auto logServicePtr = std::make_shared<Services::LogService>(Services::ServiceConfig(numArgs, argArray, "LogService"));
+        serviceRegistry.RegisterService(logServicePtr);
+
+        auto logService = std::dynamic_pointer_cast<Services::LogService>(serviceRegistry.GetService("LogService"));
+        serviceRegistry.RegisterService(std::make_shared<Services::CommunicationService>(Services::ServiceConfig(numArgs, argArray, "CommunicationService"), *logService));
     }
 
     Server::~Server()
@@ -22,7 +25,6 @@ namespace Core
         serviceRegistry.StartAll();
         while (!serviceRegistry.HasError() && SignalHandler::isRunning.load())
         {
-            logService->AddLog({"Server is running", "Server", "Run"});
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
         serviceRegistry.StopAll();

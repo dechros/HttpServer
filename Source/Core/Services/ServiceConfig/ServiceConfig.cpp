@@ -31,6 +31,7 @@ namespace Core::Services
             {
                 continue;
             }
+            key = key.substr(2);
             if (i + 1 < argc && argv[i + 1][0] != '-')
             {
                 args[key] = argv[i + 1];

@@ -18,9 +18,10 @@ namespace Core::Services
     class CommunicationService : public BaseService
     {
     private:
+        constexpr static int DEFAULT_PORT = 8080;
         constexpr static int MAX_CLIENTS = 100;
         int serverPort;
-        std::shared_ptr<LogService> logService;
+        LogService &logService;
         Utilities::SocketUtility socketUtility;
         std::vector<Types::TcpClient> clients;
 
@@ -30,7 +31,7 @@ namespace Core::Services
         void Task() override;
 
     public:
-        CommunicationService(const ServiceConfig &config, std::shared_ptr<LogService> logService);
+        CommunicationService(const ServiceConfig &config, LogService &logService);
         ~CommunicationService();
     };
 }
