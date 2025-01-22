@@ -15,14 +15,14 @@ namespace Core::Services
     private:
         constexpr static int MAX_QUEUE_SIZE = 100;
         constexpr static int TASK_INTERVAL_MS = 100;
-        std::queue<Core::Types::LogEntry> logQueue;
+        std::queue<Types::LogEntry> logQueue;
 
         void Task() override;
 
     public:
         LogService(const ServiceConfig &config);
         ~LogService();
-        void AddLog(const Core::Types::LogEntry &logEntry);
+        void AddLog(const Types::LogEntry &logEntry);
     };
 }
 

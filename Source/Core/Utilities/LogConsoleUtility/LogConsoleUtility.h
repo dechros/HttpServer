@@ -14,7 +14,7 @@ namespace Core::Utilities
 
     public:
         static void Clear();
-        static void Log(const Core::Types::LogEntry &logEntry);
+        static void Log(const Types::LogEntry &logEntry);
     };
 }
 

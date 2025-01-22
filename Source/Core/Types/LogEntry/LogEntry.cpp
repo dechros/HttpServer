@@ -3,7 +3,7 @@
 
 namespace Core::Types
 {
-    LogEntry::LogEntry(const std::string &message, const std::string &className, const std::string &methodName) : message(message), className(className), methodName(methodName), currentDateTime(Core::Helpers::DateTimeHelper::GetCurrentDateTime())
+    LogEntry::LogEntry(const std::string &message, const std::string &className, const std::string &methodName) : message(message), className(className), methodName(methodName), currentDateTime(Helpers::DateTimeHelper::GetCurrentDateTime())
     {
     }
 
@@ -21,7 +21,7 @@ namespace Core::Types
         }
         else
         {
-            std::string currentDateTime = Core::Helpers::DateTimeHelper::GetCurrentDateTime();
+            std::string currentDateTime = Helpers::DateTimeHelper::GetCurrentDateTime();
             formattedLog = "[" + currentDateTime + "] [" + className + "::" + methodName + "] " + message;
         }
 

@@ -7,13 +7,13 @@ namespace Core::Utilities
 {
     int LogFileUtility::logFileSuffix = 0;
     std::mutex LogFileUtility::logFileMutex;
-    const std::string LogFileUtility::FILE_BASE_NAME = Core::Helpers::DateTimeHelper::GetCurrentDateTime("_");
+    const std::string LogFileUtility::FILE_BASE_NAME = Helpers::DateTimeHelper::GetCurrentDateTime("_");
 
-    bool LogFileUtility::Log(const Core::Types::LogEntry &logEntry)
+    bool LogFileUtility::Log(const Types::LogEntry &logEntry)
     {
         std::unique_lock<std::mutex> lock(logFileMutex);
 
-        int fileSize = Core::Helpers::FileHelper::GetFileSizeInMB(GetLogFileName());
+        int fileSize = Helpers::FileHelper::GetFileSizeInMB(GetLogFileName());
         if (fileSize < 0)
         {
             return false;
@@ -23,7 +23,7 @@ namespace Core::Utilities
             logFileSuffix++;
         }
 
-        if (!Core::Helpers::FileHelper::AppendToFile(GetLogFileName(), logEntry.GetFormattedLog()))
+        if (!Helpers::FileHelper::AppendToFile(GetLogFileName(), logEntry.GetFormattedLog()))
         {
             logFileSuffix++;
             return false;
