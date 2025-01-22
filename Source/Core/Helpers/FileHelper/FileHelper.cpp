@@ -32,7 +32,7 @@ namespace Core::Helpers
             throw std::runtime_error("Failed to open file: " + filePath);
         }
 
-        file << content << '\n';
+        file << content << std::endl;
     }
 
     void FileHelper::WriteToFile(const std::string &filePath, const std::string &content)
@@ -64,14 +64,21 @@ namespace Core::Helpers
             path = path.parent_path();
         }
 
-        if (!std::filesystem::create_directories(path))
+        if (!std::filesystem::exists(path))
         {
-            throw std::runtime_error("Failed to create directory: " + path.string());
+            if (!std::filesystem::create_directories(path))
+            {
+                throw std::runtime_error("Failed to create directory: " + path.string());
+            }
         }
 
         if (!std::filesystem::exists(filePath))
         {
             std::ofstream(filePath).close();
+            if (!std::filesystem::exists(filePath))
+            {
+                throw std::runtime_error("Failed to create file: " + filePath);
+            }
         }
     }
 }

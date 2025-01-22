@@ -36,7 +36,8 @@
                 "${workspaceFolder}\\Source\\Core\\Utilities\\**",
                 "${workspaceFolder}\\Source\\Core\\Utilities\\LogConsoleUtility\\**",
                 "${workspaceFolder}\\Source\\Core\\Utilities\\LogFileUtility\\**",
-                "${workspaceFolder}\\Source\\Core\\Utilities\\SocketUtility\\**"
+                "${workspaceFolder}\\Source\\Core\\Utilities\\SocketUtility\\**",
+                "${workspaceFolder}/Source/Core/Helpers/FileHelper"
             ],
             "defines": [
                 "_DEBUG",

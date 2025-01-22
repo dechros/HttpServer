@@ -8,8 +8,8 @@ namespace Core::Helpers
     class DateTimeHelper
     {
     private:
-        static const std::string DateTimeHelper::GetDefaultTime();
-        static const std::string DateTimeHelper::GetDefaultDateTime(const std::string &separator);
+        static const std::string GetDefaultTime();
+        static const std::string GetDefaultDateTime(const std::string &separator);
 
     public:
         static const std::string GetCurrentTime();

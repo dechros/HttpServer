@@ -13,10 +13,12 @@ namespace Core::Services
 {
     LogService::LogService(const ServiceConfig &config) : BaseService(config)
     {
+        AddLog({"Starting LogService", GetServiceName(), "Constructor"});
     }
 
     LogService::~LogService()
     {
+        AddLog({"Stopping LogService", GetServiceName(), "Destructor"});
     }
 
     void LogService::Task()
@@ -28,9 +30,13 @@ namespace Core::Services
             {
                 Types::LogEntry logEntry = logQueue.front();
                 Utilities::LogConsoleUtility::Log(logEntry);
-                if (!Utilities::LogFileUtility::Log(logEntry))
+                try
                 {
-                    Utilities::LogConsoleUtility::Log({"Failed to log to file: " + Utilities::LogFileUtility::GetLogFileName(), GetServiceName(), "Task"});
+                    Utilities::LogFileUtility::Log(logEntry);
+                }
+                catch (const std::exception &e)
+                {
+                    Utilities::LogConsoleUtility::Log({"Error logging to file: " + std::string(e.what()), GetServiceName(), "Task"});
                 }
                 logQueue.pop();
             }
@@ -45,6 +51,7 @@ namespace Core::Services
 
         if (logQueue.size() >= MAX_QUEUE_SIZE)
         {
+            Utilities::LogConsoleUtility::Log({"Log queue full. Please increase MAX_QUEUE_SIZE", GetServiceName(), "AddLog"});
             logQueue.pop();
         }
         logQueue.push(logEntry);

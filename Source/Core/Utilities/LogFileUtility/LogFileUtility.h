@@ -20,7 +20,7 @@ namespace Core::Utilities
 
     public:
         static std::string GetLogFileName();
-        static bool Log(const Types::LogEntry &logEntry);
+        static void Log(const Types::LogEntry &logEntry);
     };
 }
 

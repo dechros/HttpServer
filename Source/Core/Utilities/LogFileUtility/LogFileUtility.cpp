@@ -9,27 +9,17 @@ namespace Core::Utilities
     std::mutex LogFileUtility::logFileMutex;
     const std::string LogFileUtility::FILE_BASE_NAME = Helpers::DateTimeHelper::GetCurrentDateTime("_");
 
-    bool LogFileUtility::Log(const Types::LogEntry &logEntry)
+    void LogFileUtility::Log(const Types::LogEntry &logEntry)
     {
         std::unique_lock<std::mutex> lock(logFileMutex);
 
         int fileSize = Helpers::FileHelper::GetFileSizeInMB(GetLogFileName());
-        if (fileSize < 0)
-        {
-            return false;
-        }
         if (fileSize >= MAX_LOG_SIZE_MB)
         {
             logFileSuffix++;
         }
 
-        if (!Helpers::FileHelper::AppendToFile(GetLogFileName(), logEntry.GetFormattedLog()))
-        {
-            logFileSuffix++;
-            return false;
-        }
-
-        return true;
+        Helpers::FileHelper::AppendToFile(GetLogFileName(), logEntry.GetFormattedLog());
     }
 
     std::string LogFileUtility::GetLogFileName()
