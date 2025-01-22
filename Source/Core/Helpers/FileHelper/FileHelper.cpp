@@ -7,120 +7,75 @@ namespace Core::Helpers
 {
     std::string FileHelper::ReadFile(const std::string &filePath)
     {
-        try
+        EnsurePathAndFileExists(filePath);
+
+        std::stringstream content;
+        std::ifstream file(filePath);
+
+        if (!file.is_open())
         {
-            if (!EnsurePathAndFileExists(filePath))
-            {
-                return "";
-            }
-
-            std::stringstream content;
-            std::ifstream file(filePath);
-
-            if (!file.is_open())
-            {
-                return "";
-            }
-
-            content << file.rdbuf();
-            file.close();
-            return content.str();
+            throw std::runtime_error("Failed to open file: " + filePath);
         }
-        catch (...)
-        {
-            return "";
-        }
+
+        content << file.rdbuf();
+        return content.str();
     }
 
-    bool FileHelper::AppendToFile(const std::string &filePath, const std::string &content)
+    void FileHelper::AppendToFile(const std::string &filePath, const std::string &content)
     {
-        try
-        {
-            if (!EnsurePathAndFileExists(filePath))
-            {
-                return false;
-            }
+        EnsurePathAndFileExists(filePath);
 
-            std::ofstream file(filePath, std::ios::app);
-            if (!file.is_open())
-            {
-                return false;
-            }
+        std::ofstream file(filePath, std::ios::app);
 
-            file << content << std::endl;
-            file.close();
-            return true;
-        }
-        catch (...)
+        if (!file.is_open())
         {
-            return false;
+            throw std::runtime_error("Failed to open file: " + filePath);
         }
+
+        file << content << '\n';
     }
 
-    bool FileHelper::WriteToFile(const std::string &filePath, const std::string &content)
+    void FileHelper::WriteToFile(const std::string &filePath, const std::string &content)
     {
-        try
+        std::ofstream file(filePath);
+
+        if (!file.is_open())
         {
-            if (!EnsurePathAndFileExists(filePath))
-            {
-                return false;
-            }
-
-            std::ofstream file(filePath);
-
-            if (!file.is_open())
-            {
-                return false;
-            }
-
-            file << content;
-            file.close();
-            return true;
+            throw std::runtime_error("Failed to open file: " + filePath);
         }
-        catch (...)
-        {
-            return false;
-        }
+
+        file << content;
     }
 
     int FileHelper::GetFileSizeInMB(const std::string &filePath)
     {
-        try
-        {
-            if (!EnsurePathAndFileExists(filePath))
-            {
-                return -1;
-            }
+        EnsurePathAndFileExists(filePath);
 
-            return static_cast<int>(std::filesystem::file_size(filePath) / (1024 * 1024));
-        }
-        catch (...)
-        {
-            return -1;
-        }
+        auto fileSizeBytes = std::filesystem::file_size(filePath);
+        return static_cast<int>(fileSizeBytes / (1024 * 1024));
     }
 
-    bool FileHelper::EnsurePathAndFileExists(const std::string &filePath)
+    void FileHelper::EnsurePathAndFileExists(const std::string &filePath)
     {
         try
         {
             std::filesystem::path path = filePath;
+
             if (path.has_extension())
             {
                 path = path.parent_path();
             }
+
             std::filesystem::create_directories(path);
 
             if (!std::filesystem::exists(filePath))
             {
                 std::ofstream(filePath).close();
             }
-
-            return true;
         }
-        catch (...)
+        catch (const std::exception &e)
         {
-            return false;
+            throw std::runtime_error("File or path does not exist: " + filePath + " | Reason: " + std::string(e.what()));
         }
     }
 }

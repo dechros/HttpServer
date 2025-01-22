@@ -10,12 +10,12 @@ namespace Core::Helpers
     {
     public:
         static std::string ReadFile(const std::string &filePath);
-        static bool AppendToFile(const std::string &filePath, const std::string &content);
-        static bool WriteToFile(const std::string &filePath, const std::string &content);
+        static void AppendToFile(const std::string &filePath, const std::string &content);
+        static void WriteToFile(const std::string &filePath, const std::string &content);
         static int GetFileSizeInMB(const std::string &filePath);
 
     private:
-        static bool EnsurePathAndFileExists(const std::string &filePath);
+        static void EnsurePathAndFileExists(const std::string &filePath);
     };
 }
 

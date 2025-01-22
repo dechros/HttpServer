@@ -1,53 +1,45 @@
 #include "DateTimeHelper.h"
 #include <iostream>
 #include <ctime>
+#include <stdexcept>
 
 namespace Core::Helpers
 {
-    std::string DateTimeHelper::GetCurrentTime()
+    const std::string DateTimeHelper::GetCurrentTime()
     {
-        std::string defaultTime = "00:00:00";
-
         time_t now = std::time(nullptr);
         if (now == -1)
         {
-            return defaultTime;
+            return GetDefaultTime();
         }
 
         std::tm *tm = std::localtime(&now);
         if (tm == nullptr)
         {
-            return defaultTime;
+            return GetDefaultTime();
         }
 
         char buffer[20];
-        std::strftime(buffer, sizeof(buffer), "%H:%M:%S", tm);
+        if (std::strftime(buffer, sizeof(buffer), "%H:%M:%S", tm) == 0)
+        {
+            return GetDefaultTime();
+        }
 
         return std::string(buffer);
     }
 
-    std::string DateTimeHelper::GetCurrentDateTime(const std::string &separator)
+    const std::string DateTimeHelper::GetCurrentDateTime(const std::string &separator)
     {
-        std::string defaultDateTime;
-        if (separator.empty())
-        {
-            defaultDateTime = "1970-01-01 00:00:00";
-        }
-        else
-        {
-            defaultDateTime = "1970" + separator + "01" + separator + "01" + separator + "00" + separator + "00" + separator + "00";
-        }
-
         time_t now = std::time(nullptr);
         if (now == -1)
         {
-            return defaultDateTime;
+            return GetDefaultDateTime(separator);
         }
 
         std::tm *tm = std::localtime(&now);
         if (tm == nullptr)
         {
-            return defaultDateTime;
+            return GetDefaultDateTime(separator);
         }
 
         std::string format;
@@ -65,8 +57,28 @@ namespace Core::Helpers
         }
 
         char buffer[30];
-        std::strftime(buffer, sizeof(buffer), format.c_str(), tm);
+        if (std::strftime(buffer, sizeof(buffer), format.c_str(), tm) == 0)
+        {
+            return GetDefaultDateTime(separator);
+        }
 
         return std::string(buffer);
+    }
+
+    const std::string DateTimeHelper::GetDefaultTime()
+    {
+        return "00:00:00";
+    }
+
+    const std::string DateTimeHelper::GetDefaultDateTime(const std::string &separator)
+    {
+        if (separator.empty())
+        {
+            return "1970-01-01 00:00:00";
+        }
+        else
+        {
+            return "1970" + separator + "01" + separator + "01" + separator + "00" + separator + "00" + separator + "00";
+        }
     }
 }

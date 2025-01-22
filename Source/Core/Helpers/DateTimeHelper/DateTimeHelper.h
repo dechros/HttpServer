@@ -7,9 +7,13 @@ namespace Core::Helpers
 {
     class DateTimeHelper
     {
+    private:
+        static const std::string DateTimeHelper::GetDefaultTime();
+        static const std::string DateTimeHelper::GetDefaultDateTime(const std::string &separator);
+
     public:
-        static std::string GetCurrentTime();
-        static std::string GetCurrentDateTime(const std::string &separator = "");
+        static const std::string GetCurrentTime();
+        static const std::string GetCurrentDateTime(const std::string &separator = "");
     };
 }
 

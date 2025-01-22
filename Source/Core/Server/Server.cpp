@@ -9,8 +9,8 @@ namespace Core
     {
         Core::SignalHandler::Initialize();
         serviceRegistry.RegisterService(std::make_shared<Services::LogService>(Services::ServiceConfig(numArgs, argArray, "LogService")));
-        /* TODO: Register other services */
         logService = std::dynamic_pointer_cast<Services::LogService>(*serviceRegistry.GetService("LogService"));
+        serviceRegistry.RegisterService(std::make_shared<Services::CommunicationService>(Services::ServiceConfig(numArgs, argArray, "CommunicationService"), logService));
     }
 
     Server::~Server()
