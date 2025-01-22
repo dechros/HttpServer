@@ -76,6 +76,10 @@ namespace Core::Helpers
         {
             return "1970-01-01 00:00:00";
         }
+        else if (separator == "/")
+        {
+            return "1970_01_01_00_00_00";
+        }
         else
         {
             return "1970" + separator + "01" + separator + "01" + separator + "00" + separator + "00" + separator + "00";

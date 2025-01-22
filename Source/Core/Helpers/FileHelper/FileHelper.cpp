@@ -57,25 +57,21 @@ namespace Core::Helpers
 
     void FileHelper::EnsurePathAndFileExists(const std::string &filePath)
     {
-        try
+        std::filesystem::path path = filePath;
+
+        if (path.has_extension())
         {
-            std::filesystem::path path = filePath;
-
-            if (path.has_extension())
-            {
-                path = path.parent_path();
-            }
-
-            std::filesystem::create_directories(path);
-
-            if (!std::filesystem::exists(filePath))
-            {
-                std::ofstream(filePath).close();
-            }
+            path = path.parent_path();
         }
-        catch (const std::exception &e)
+
+        if (!std::filesystem::create_directories(path))
         {
-            throw std::runtime_error("File or path does not exist: " + filePath + " | Reason: " + std::string(e.what()));
+            throw std::runtime_error("Failed to create directory: " + path.string());
+        }
+
+        if (!std::filesystem::exists(filePath))
+        {
+            std::ofstream(filePath).close();
         }
     }
 }
