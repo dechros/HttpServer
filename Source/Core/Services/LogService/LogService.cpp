@@ -13,12 +13,10 @@ namespace Core::Services
 {
     LogService::LogService(const ServiceConfig &config) : BaseService(config)
     {
-        AddLog({"Starting LogService", GetServiceName(), "Constructor"});
     }
 
     LogService::~LogService()
     {
-        AddLog({"Stopping LogService", GetServiceName(), "Destructor"});
     }
 
     void LogService::Task()

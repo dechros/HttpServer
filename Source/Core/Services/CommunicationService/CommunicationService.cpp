@@ -6,11 +6,10 @@ namespace Core::Services
 {
     CommunicationService::CommunicationService(const ServiceConfig &config, LogService &logService) : BaseService(config), logService(logService)
     {
-        logService.AddLog({"Starting CommunicationService", "CommunicationService", "Constructor"});
-
         try
         {
             serverPort = std::stoi(serviceConfig.Get("port"));
+            logService.AddLog({"Using port: " + std::to_string(serverPort), "CommunicationService", "Constructor"});
         }
         catch (const std::exception &e)
         {
@@ -32,8 +31,6 @@ namespace Core::Services
 
     CommunicationService::~CommunicationService()
     {
-        logService.AddLog({"Stopping CommunicationService", "CommunicationService", "Destructor"});
-
         for (auto &client : clients)
         {
             try
