@@ -1,6 +1,7 @@
 #include "CommunicationService.h"
 #include <thread>
 #include <algorithm>
+#include <chrono>
 
 namespace Core::Services
 {
@@ -50,24 +51,30 @@ namespace Core::Services
     {
         try
         {
-            std::string message = socketUtility.Receive(client);
-            if (message.empty())
+            if (!client.IsTimeout(CLIENT_TIMEOUT_MS))
             {
-                logService.AddLog({"Client disconnected", "CommunicationService", "HandleClient"});
+                std::string message = socketUtility.Receive(client);
+                if (!message.empty())
+                {
+                    logService.AddLog({"Received message: " + message, "CommunicationService", "HandleClient"});
+                    socketUtility.Send(client.GetSocket(), "Echo: " + message);
+                    logService.AddLog({"Sent response", "CommunicationService", "HandleClient"});
+                }
+            }
+            else
+            {
+                logService.AddLog({"Client disconnected due to timeout", "CommunicationService", "HandleClient"});
                 socketUtility.CloseSocket(client.GetSocket());
                 clients.erase(std::remove(clients.begin(), clients.end(), client), clients.end());
                 return;
             }
-
-            logService.AddLog({"Received message: " + message, "CommunicationService", "HandleClient"});
-            socketUtility.Send(client.GetSocket(), "Echo: " + message);
-            logService.AddLog({"Sent response", "CommunicationService", "HandleClient"});
         }
         catch (const std::exception &e)
         {
             logService.AddLog({"Error handling client: " + std::string(e.what()), "CommunicationService", "HandleClient"});
             socketUtility.CloseSocket(client.GetSocket());
             clients.erase(std::remove(clients.begin(), clients.end(), client), clients.end());
+            return;
         }
     }
 
@@ -83,7 +90,7 @@ namespace Core::Services
                 return;
             }
 
-            logService.AddLog({"Client connected", "CommunicationService", "Task"});
+            logService.AddLog({"Client connected: " + std::to_string(client.GetSocket()), "CommunicationService", "Task"});
 
             if (clients.size() >= MAX_CLIENTS)
             {
@@ -101,7 +108,13 @@ namespace Core::Services
 
             clients.push_back(client);
 
-            std::thread(&CommunicationService::HandleClient, this, client).detach();
+            std::thread([this, client]()
+                        {
+                while (IsRunning() && !error.load() && client.GetSocket() >= 0)
+                {
+                    CommunicationService::HandleClient(client);
+                } })
+                .detach();
         }
         catch (const std::exception &e)
         {

@@ -20,6 +20,7 @@ namespace Core::Services
     private:
         constexpr static int DEFAULT_PORT = 8080;
         constexpr static int MAX_CLIENTS = 100;
+        constexpr static int CLIENT_TIMEOUT_MS = 5000;
         int serverPort;
         LogService &logService;
         Utilities::SocketUtility socketUtility;

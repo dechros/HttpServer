@@ -15,11 +15,11 @@ namespace Core::Types
         lastActivity = std::chrono::steady_clock::now();
     }
 
-    bool TcpClient::IsTimeout(int timeoutSeconds) const
+    bool TcpClient::IsTimeout(int timeoutMilliseconds) const
     {
         auto now = std::chrono::steady_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - lastActivity).count();
-        return elapsed >= timeoutSeconds;
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastActivity).count();
+        return elapsed >= timeoutMilliseconds;
     }
 
     int TcpClient::GetSocket() const

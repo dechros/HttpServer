@@ -15,7 +15,7 @@ namespace Core::Types
         TcpClient(int socket);
         ~TcpClient();
         void UpdateActivity();
-        bool IsTimeout(int timeoutSeconds) const;
+        bool IsTimeout(int timeoutMilliseconds) const;
         int GetSocket() const;
         bool operator==(const TcpClient &other) const;
     };
